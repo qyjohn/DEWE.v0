@@ -28,10 +28,9 @@ aws s3 mb s3://<my-bucket> --region us-east-1
 aws s3 cp --recursive SimpleDemo s3://<my-bucket>/SimpleDemo/ --region us-east-1
 ~~~~
 
-The SimpleDemo workflow looks like the 
+The structure of the SimpleDemo workflow looks like this:
 
-
-[SimpleDemo](http://www.qyjohn.net/wp-content/uploads/2015/08/屏幕快照-2015-08-16-下午3.42.48.png)
+![SimpleDemo](http://www.qyjohn.net/wp-content/uploads/2015/08/屏幕快照-2015-08-16-下午3.42.48.png)
 
 Start the workflow scheduler:
 
