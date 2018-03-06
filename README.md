@@ -122,6 +122,6 @@ aws sqs delete-queue --queue-name dewev0-ack --region us-east-1
 
 **References**
 
-Qingye Jiang, Young Choon Lee, Albert Y. Zomaya, “Executing Large Scale Scientific Workflow Ensembles in Public Clouds“, 44th International Conference on Parallel Processing (ICPP-2015), Beijing, September 2015
+Qingye Jiang, Young Choon Lee, Albert Y. Zomaya, “Executing Large Scale Scientific Workflow Ensembles in Public Clouds“, The 44th International Conference on Parallel Processing (ICPP 2015), Beijing, September 2015
 
 Qingye Jiang, Young Choon Lee, Albert Y. Zomaya, “Serverless Execution of Scientific Workflows”, The 15th International Conference on Service-Oriented Computing (ICSOC 2017), 2017.11, Malaga, Spain, 2017.11
