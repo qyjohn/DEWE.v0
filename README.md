@@ -14,7 +14,7 @@ mvn package
 
 To run this demo, we recommend that you launch two EC2 instances, with the AWS CLI installed. One EC2 instance runs the workflow scheduler, one EC2 instance runs the local worker. Both EC2 instance should have an IAM role with full access to Amazon S3 and SQS. 
 
-On the workflow scheduler node, create an SQS queue. Here we assume that you are using the N. Virginia (us-east-1) region. If not, you need to replace the region name in the commands. Edit config.properties, replace the value for "queueUrl" with the URL you see in the following command output. Please note that you should have the same config.properties file on both EC2 instances.
+On the workflow scheduler node, create an SQS queue. Here we assume that you are using the N. Virginia (us-east-1) region. If not, you need to replace the region name in the commands. Edit config.properties, replace the value for "queueUrl" with the URL you see in the following command output. Please note that you should have the same config.properties file on both EC2 instances. (We mentioned that DEWE.v0 needs two SQS queues, but we are only creating one (the ACK queue) here. The other one (the job queu) will be created and terminated by the workflow scheduler when it runs.)
 
 ~~~~
 aws sqs create-queue --queue-name dewev0-ack --region us-east-1
