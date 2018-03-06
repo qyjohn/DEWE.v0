@@ -1,6 +1,6 @@
 # DEWE.v0
 
-DEWE.v0 is a very simple workflow execution engine developed with the producer/consumer model. We make this project available as an entry level introduction to researchers who are interested in building distributed systems to execute scientific workflows. 
+DEWE.v0 is a very simple workflow execution engine developed with the producer/consumer model. We make this project available as an entry level introduction to researchers who are interested in building distributed systems to execute scientific workflows. For full-featured workflow execution engines, you should look into [DEWE.v2](https://github.com/qyjohn/DEWE.v2) and [DEWE.v3](https://github.com/qyjohn/DEWE.v3) instead.
 
 In short, this system includes a producer (the workflow scheduler) and a consumer (the local worker), with two queues (Amazon SQS) in between. The workflow scheduler (WorkflowScheduler.java) takes a workflow definition, then dispatches jobs that are elegible to run to a job queue. The local worker (LocalWorker.java) polls the job queue for jobs to run, then sends acknowledge messages to an ack queue. The workflow scheduler polls the ack queue to know which jobs are completed, and dispatches others jobs to the job queue when they are elegible to run.
 
@@ -118,3 +118,10 @@ When you are done with your experiments, please remember to delete your SQS queu
 ~~~~
 aws sqs delete-queue --queue-name dewev0-ack --region us-east-1
 ~~~~
+
+
+**References**
+
+Qingye Jiang, Young Choon Lee, Albert Y. Zomaya, “Executing Large Scale Scientific Workflow Ensembles in Public Clouds“, 44th International Conference on Parallel Processing (ICPP-2015), Beijing, September 2015
+
+Qingye Jiang, Young Choon Lee, Albert Y. Zomaya, “Serverless Execution of Scientific Workflows”, The 15th International Conference on Service-Oriented Computing (ICSOC 2017), 2017.11, Malaga, Spain, 2017.11
