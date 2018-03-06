@@ -1,6 +1,6 @@
 # DEWE.v0
 
-DEWE.v0 is a very simple workflow execution engine developed with the producer/consumer model. We make this project available as an entry level introduction to researchers who are interested in building distributed systems to execute scientific workflows. For full-featured workflow execution engines, you should look into [DEWE.v2](https://github.com/qyjohn/DEWE.v2) and [DEWE.v3](https://github.com/qyjohn/DEWE.v3) instead.
+DEWE.v0 is a very simple scentific workflow execution engine developed with the producer/consumer model. We make this project available as an entry level introduction to researchers who are interested in building distributed systems to execute scientific workflows. For full-featured workflow execution engines, you should look into [DEWE.v2](https://github.com/qyjohn/DEWE.v2) and [DEWE.v3](https://github.com/qyjohn/DEWE.v3) instead.
 
 In short, this system includes a producer (the workflow scheduler) and a consumer (the local worker), with two queues (Amazon SQS) in between. The workflow scheduler (WorkflowScheduler.java) takes a workflow definition, then dispatches jobs that are elegible to run to a job queue. The local worker (LocalWorker.java) polls the job queue for jobs to run, then sends acknowledge messages to an ack queue. The workflow scheduler polls the ack queue to know which jobs are completed, and dispatches others jobs to the job queue when they are elegible to run.
 
@@ -12,7 +12,7 @@ cd DEWE.v0
 mvn package
 ~~~~
 
-To run this demo, we recommend that you launch two EC2 instances, with the AWS CLI installed. One EC2 instance runs the workflow scheduler, one EC2 instance runs the local worker. Both EC2 instance should have an IAM role with full access to Amazon S3 and SQS. (You can of course run both the workflow scheduler and the local worker on the same EC2 instance in two separate SSH windows.)
+To run this demo, we recommend that you launch two or more EC2 instances, with the AWS CLI installed. One EC2 instance runs the workflow scheduler, one or more EC2 instances run the local worker. Both EC2 instance should have an IAM role with full access to Amazon S3 and SQS. (You can of course run both the workflow scheduler and the local worker on the same EC2 instance in two separate SSH windows.)
 
 On the workflow scheduler node, create an SQS queue. Here we assume that you are using the N. Virginia (us-east-1) region. If not, you need to replace the region name in the commands. Edit config.properties, replace the value for "queueUrl" with the URL you see in the following command output. Please note that you should have the same config.properties file on both EC2 instances. (We mentioned that DEWE.v0 needs two SQS queues, but we are only creating one (the ACK queue) here. The other one (the job queu) will be automatically created and terminated by the workflow scheduler when it runs.)
 
@@ -106,7 +106,7 @@ Start the workflow scheduler:
 java -cp target/dewev0-1.0-SNAPSHOT.jar:. net.qyjohn.dewev0.WorkflowScheduler <my-bucket> SimpleDemo
 ~~~~
 
-On the local worker node, run the local worker:
+On the local worker node(s), run the local worker:
 
 ~~~~
 cd DEWE.v0
@@ -117,6 +117,15 @@ When you are done with your experiments, please remember to delete your SQS queu
 
 ~~~~
 aws sqs delete-queue --queue-name dewev0-ack --region us-east-1
+~~~~
+
+We have also prepared a 0.20-degree Montage workflow for demo. You can run this with the following commands on the workflow scheduler node:
+
+
+~~~~
+cd DEWE.v0
+aws s3 cp --recursive Montage_0.2 s3://<my-bucket>/Montage_0.2/ --region us-east-1
+java -cp target/dewev0-1.0-SNAPSHOT.jar:. net.qyjohn.dewev0.WorkflowScheduler <my-bucket> Montage_0.2
 ~~~~
 
 
