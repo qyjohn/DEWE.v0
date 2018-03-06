@@ -112,3 +112,9 @@ On the local worker node, run the local worker:
 cd DEWE.v0
 java -cp target/dewev0-1.0-SNAPSHOT.jar:. net.qyjohn.dewev0.LocalWorker 
 ~~~~
+
+When you are done with your experiments, please remember to delete your SQS queue and terminate the EC2 instances to avoid further charges.
+
+~~~~
+aws sqs delete-queue --queue-name dewev0-ack --region us-east-1
+~~~~
