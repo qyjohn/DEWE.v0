@@ -17,7 +17,7 @@ To run this demo, we recommend that you launch two EC2 instances, with the AWS C
 On the workflow scheduler node, create an SQS queue. Here we assume that you are using the N. Virginia (us-east-1) region. If not, you need to replace the region name in the commands. Edit config.properties, replace the value for "queueUrl" with the URL you see in the following command output. Please note that you should have the same config.properties file on both EC2 instances.
 
 ~~~~
-aws sqs create-queue --queue-name dewev0 --region us-east-1
+aws sqs create-queue --queue-name dewev0-ack --region us-east-1
 aws sqs list-queues --region us-east-1
 ~~~~
 
